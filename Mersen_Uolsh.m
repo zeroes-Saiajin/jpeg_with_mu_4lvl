@@ -4,11 +4,13 @@ clc
 
 
 %Первый этап - подключение изображения
-I0=imread('initiald.png');
+I0=imread('dog.bmp');
 I=double(I0);
 %Размер блоков матриц,с которыми мы будем работать
-n = 35
-proc = 0.5
+m = 4
+n = 4.^m - 1
+
+proc = 0.8
 
 %Второй этап - Создание Матрицы Мерсенна-Уолша
 T = Walsh_MERS(n)
@@ -27,7 +29,6 @@ I=I(:,:,1)
 figure()
 imshow(uint8(I))
 title('исходное изображение')
-
 
 
 %Умножение ММУ на блоки матрицы изображения n-размера
@@ -80,16 +81,6 @@ I3 = I2./(Proverka4(2,2))
 figure()
 imshow(uint8(I3))
 title('востановленное изображение 4')
+imwrite(uint8(I3),'proverka2.bmp')
 
-imwrite(uint8(I3),'proverka.jpg')
 
-%Метрика изображения
-%MSE = immse(I,I3)
-
-%[peaksnr, snr] = psnr(I,I3)
-%[ssimval, ssimmap] = ssim(I,I3)
-
-%fprintf('\n The mean-squared error  is %0.4f \n', MSE);
-%fprintf('\n The Peak-SNR value is %0.4f', peaksnr);
-%fprintf('\n The SNR value is %0.4f \n', snr);
-%fprintf('\n The Structural Similarity   is %0.4f \n', ssimval);
